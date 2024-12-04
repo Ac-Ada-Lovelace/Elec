@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zys.elec.mapper.FollowMapper">
+    <resultMap id="FollowResultMap" type="com.zys.elec.entity.Follow">
+        <id property="id" column="id"/>
+        <result property="followerId" column="follower_id"/>
+        <result property="followeeId" column="followee_id"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="isDeleted" column="is_deleted"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.zys.elec.entity.Follow">
+        INSERT INTO follows (follower_id, followee_id, created_at, is_deleted)
+        VALUES (#{followerId}, #{followeeId}, #{createdAt}, #{isDeleted})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM follows WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.zys.elec.entity.Follow">
+        UPDATE follows
+        SET
+            follower_id = #{followerId},
+            followee_id = #{followeeId},
+            created_at = #{createdAt},
+            is_deleted = #{isDeleted}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="long" resultMap="FollowResultMap">
+        SELECT * FROM follows WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="FollowResultMap">
+        SELECT * FROM follows
+    </select>
+</mapper>

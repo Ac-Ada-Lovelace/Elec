@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zys.elec.mapper.DataMapper">
+    <resultMap id="DataResultMap" type="com.zys.elec.entity.Data">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="value" column="value"/>
+        <result property="timestamp" column="timestamp"/>
+        <result property="isDeleted" column="is_deleted"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.zys.elec.entity.Data">
+        INSERT INTO data (user_id, value, timestamp, is_deleted)
+        VALUES (#{userId}, #{value}, #{timestamp}, #{isDeleted})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM data WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.zys.elec.entity.Data">
+        UPDATE data
+        SET
+            user_id = #{userId},
+            value = #{value},
+            timestamp = #{timestamp},
+            is_deleted = #{isDeleted}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="long" resultMap="DataResultMap">
+        SELECT * FROM data WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="DataResultMap">
+        SELECT * FROM data
+    </select>
+</mapper>

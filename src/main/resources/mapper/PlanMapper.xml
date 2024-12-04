@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zys.elec.mapper.PlanMapper">
+    <resultMap id="PlanResultMap" type="com.zys.elec.entity.Plan">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="progress" column="progress"/>
+        <result property="actualEndTime" column="actual_end_time"/>
+        <result property="isDeleted" column="is_deleted"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.zys.elec.entity.Plan">
+        INSERT INTO plans (user_id, start_time, end_time, progress, actual_end_time, is_deleted)
+        VALUES (#{userId}, #{startTime}, #{endTime}, #{progress}, #{actualEndTime}, #{isDeleted})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM plans WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.zys.elec.entity.Plan">
+        UPDATE plans
+        SET
+            user_id = #{userId},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            progress = #{progress},
+            actual_end_time = #{actualEndTime},
+            is_deleted = #{isDeleted}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="long" resultMap="PlanResultMap">
+        SELECT * FROM plans WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="PlanResultMap">
+        SELECT * FROM plans
+    </select>
+</mapper>
