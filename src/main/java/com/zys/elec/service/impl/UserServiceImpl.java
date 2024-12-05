@@ -48,13 +48,11 @@ public class UserServiceImpl implements UserService {
         return user != null ? ServiceResult.success(user) : ServiceResult.failure("用户不存在");
     }
 
-
     @Override
     public ServiceResult<List<User>> getAllUsers() {
         List<User> users = userMapper.selectAll();
         return ServiceResult.success(users);
     }
-
 
     private boolean save(User user) {
         // implement save user
@@ -64,6 +62,18 @@ public class UserServiceImpl implements UserService {
             return userMapper.update(user) > 0;
         }
 
+    }
+
+    @Override
+    public ServiceResult<Boolean> getUserByUser(User user) {
+        User user1 = userMapper.selectByUsername(user.getUsername());
+        if (user1 == null) {
+            return ServiceResult.failure("用户或密码不存在");
+        }
+        if (user1.getPassword().equals(user.getPassword())) {
+            return ServiceResult.success(true);
+        }
+        return ServiceResult.failure("用户或密码错误");
     }
 
     // @Override

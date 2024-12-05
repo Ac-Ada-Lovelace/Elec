@@ -50,3 +50,4 @@ public class Follow {
         this.isDeleted = isDeleted;
     }
 }
+

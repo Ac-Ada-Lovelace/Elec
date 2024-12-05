@@ -12,4 +12,5 @@ public interface UserService {
     ServiceResult<Boolean> updateUser(User user);
     ServiceResult<User> getUserById(Long id);
     ServiceResult<List<User>> getAllUsers();
+    ServiceResult<Boolean> getUserByUser(User user);
 }
