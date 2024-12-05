@@ -19,8 +19,11 @@
     </insert>
 
     <delete id="deleteById" parameterType="long">
-        DELETE FROM users WHERE id = #{id}
+        UPDATE users
+        SET is_deleted = 1
+        WHERE id = #{id}
     </delete>
+    
 
     <update id="update" parameterType="com.example.project.entity.User">
         UPDATE users
