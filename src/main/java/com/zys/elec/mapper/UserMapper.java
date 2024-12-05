@@ -2,8 +2,8 @@ package com.zys.elec.mapper;
 
 import java.util.List;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.zys.elec.entity.User;
 
@@ -14,5 +14,6 @@ public interface UserMapper {
     int update(User user);
     User selectById(Long id);
     List<User> selectAll();
-
+     // 根据用户名查询用户
+    User selectByUsername(@Param("username") String username);
 }

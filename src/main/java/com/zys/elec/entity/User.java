@@ -8,7 +8,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    private byte[] avatar;
+    private String avatar;
     private Timestamp createdAt;
     private Boolean isDeleted;
 
@@ -36,11 +36,11 @@ public void setPassword(String password) {
     this.password = password;
 }
 
-public byte[] getAvatar() {
+public String getAvatar() {
     return avatar;
 }
 
-public void setAvatar(byte[] avatar) {
+public void setAvatar(String avatar) {
     this.avatar = avatar;
 }
 

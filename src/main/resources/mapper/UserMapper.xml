@@ -1,46 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.project.mapper.UserMapper">
-    <resultMap id="UserResultMap" type="com.example.project.entity.User">
-        <id property="id" column="id"/>
-        <result property="username" column="username"/>
-        <result property="password" column="password"/>
-        <result property="avatar" column="avatar"/>
-        <result property="createdAt" column="created_at"/>
-        <result property="isDeleted" column="is_deleted"/>
+<mapper namespace="com.zys.elec.mapper.UserMapper">
+    <resultMap id="UserResultMap" type="com.zys.elec.entity.User">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="avatar" column="avatar" />
+        <result property="createdAt" column="created_at" />
+        <result property="isDeleted" column="is_deleted" />
     </resultMap>
 
-    <insert id="insert" parameterType="com.example.project.entity.User">
-        INSERT INTO users (username, password, avatar, created_at, is_deleted)
-        VALUES (#{username}, #{password}, #{avatar}, #{createdAt}, #{isDeleted})
-    </insert>
+    <insert id="insert" parameterType="com.zys.elec.entity.User"> INSERT INTO users (username,
+        password, avatar, created_at, is_deleted) VALUES (#{username}, #{password}, #{avatar},
+        #{createdAt}, #{isDeleted}) </insert>
 
-    <delete id="deleteById" parameterType="long">
-        UPDATE users
-        SET is_deleted = 1
-        WHERE id = #{id}
-    </delete>
-    
+    <delete id="deleteById" parameterType="long"> DELETE FROM users WHERE id = #{id} </delete>
 
-    <update id="update" parameterType="com.example.project.entity.User">
-        UPDATE users
-        SET
-            username = #{username},
-            password = #{password},
-            avatar = #{avatar},
-            created_at = #{createdAt},
-            is_deleted = #{isDeleted}
-        WHERE id = #{id}
-    </update>
+    <update id="update" parameterType="com.zys.elec.entity.User"> UPDATE users SET username =
+        #{username}, password = #{password}, avatar = #{avatar}, created_at = #{createdAt},
+        is_deleted = #{isDeleted} WHERE id = #{id} </update>
 
-    <select id="selectById" parameterType="long" resultMap="UserResultMap">
-        SELECT * FROM users WHERE id = #{id}
-    </select>
+    <select id="selectById" parameterType="long" resultMap="UserResultMap"> SELECT * FROM users
+        WHERE id = #{id} </select>
 
-    <select id="selectAll" resultMap="UserResultMap">
-        SELECT * FROM users
-    </select>
+    <select id="selectAll" resultMap="UserResultMap"> SELECT * FROM users </select>
+
+    <select id="selectByUsername" parameterType="string" resultMap="UserResultMap"> SELECT * FROM
+        users WHERE username = #{username} </select>
 </mapper>
