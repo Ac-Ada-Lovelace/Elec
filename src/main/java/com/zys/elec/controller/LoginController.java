@@ -10,7 +10,11 @@ import com.zys.elec.entity.User;
 import com.zys.elec.service.JWTAuthService;
 import com.zys.elec.service.LoginService;
 
-import jakarta.validation.Valid;
+import io.micrometer.common.lang.NonNull;
+
+import org.springframework.web.bind.annotation.PostMapping;
+
+
 
 @RestController
 @RequestMapping("/login")
@@ -21,7 +25,12 @@ public class LoginController {
     @Autowired
     private JWTAuthService jwtAuthService;
 
-    public ResponseResult<String> login(@RequestBody @Valid User user, String captcha) {
+    // example of a POST request
+    // url: http://localhost:8080/login
+    // headers: { "Content-Type": "application/json" }
+    // body {{""username"": ""admin"", ""password"": ""admin""}, ""captcha"": ""123456""}
+    @PostMapping("/")
+    public ResponseResult<String> login(@RequestBody @NonNull User user, @NonNull String captcha) {
         var res = loginService.login(user);
 
         if (!res.isSuccess()) {
@@ -29,6 +38,5 @@ public class LoginController {
         }
         String token = jwtAuthService.generateToken(user.getUsername(), captcha); // Generate JWT
         return ResponseResult.success(token);
-
     }
 }

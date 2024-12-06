@@ -10,6 +10,9 @@ import com.zys.elec.service.JWTAuthService;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class JWTAuthServiceImpl implements JWTAuthService {
     private static final String SECRET_KEY = "your_secret_key";
     private static final long EXPIRATION_TIME = 86400000; // 1 day in milliseconds
