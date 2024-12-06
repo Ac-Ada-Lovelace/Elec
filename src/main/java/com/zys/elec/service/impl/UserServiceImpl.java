@@ -54,6 +54,8 @@ public class UserServiceImpl implements UserService {
         return ServiceResult.success(users);
     }
 
+    
+    @SuppressWarnings("unused")
     private boolean save(User user) {
         // implement save user
         if (user.getId() == null) {

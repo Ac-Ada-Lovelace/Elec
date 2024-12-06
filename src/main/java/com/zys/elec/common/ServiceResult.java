@@ -2,9 +2,9 @@ package com.zys.elec.common;
 
 // 定义通用的结果类 ServiceResult
 public class ServiceResult<T> {
-    private boolean success;
-    private String message;
-    private T data;
+    private final boolean success;
+    private final String message;
+    private final T data;
 
     // 构造方法
 
