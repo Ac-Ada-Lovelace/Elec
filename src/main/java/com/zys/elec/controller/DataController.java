@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zys.elec.common.ResponseResult;
 import com.zys.elec.entity.Data;
 import com.zys.elec.service.DataService;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/data")
@@ -24,13 +28,14 @@ public class DataController {
     private DataService dataService;
 
     @PostMapping
-    public int createData(@RequestBody Data data) {
-        return dataService.createData(data);
+    public ResponseResult<String> createData(@RequestBody @Valid Data data) {
+        int result = dataService.createData(data);
+        return result > 0 ? ResponseResult.success("数据创建成功") : ResponseResult.failure("数据创建失败");
     }
-
     @DeleteMapping("/{id}")
-    public int deleteData(@PathVariable Long id) {
-        return dataService.deleteData(id);
+    public ResponseResult<String> deleteData(@PathVariable @NotNull Long id) {
+        int result = dataService.deleteData(id);
+        return result > 0 ? ResponseResult.success("数据删除成功") : ResponseResult.failure("数据删除失败");
     }
 
     @PutMapping("/{id}")
@@ -45,7 +50,8 @@ public class DataController {
     }
 
     @GetMapping
-    public List<Data> getAllData() {
-        return dataService.getAllData();
+    public ResponseResult<List<Data>> getAllData() {
+        List<Data> dataList = dataService.getAllData();
+        return ResponseResult.success(dataList);
     }
 }
