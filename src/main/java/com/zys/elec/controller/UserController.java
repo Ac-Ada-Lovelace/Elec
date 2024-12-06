@@ -43,6 +43,7 @@ public class UserController {
         return user.isSuccess() ? ResponseResult.success(user.getData()) : ResponseResult.error(user.getMessage());
     }
 
+    
     /**
      * 更新用户信息
      * example request: PUT /users/1

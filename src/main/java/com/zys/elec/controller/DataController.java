@@ -54,4 +54,6 @@ public class DataController {
         List<Data> dataList = dataService.getAllData();
         return ResponseResult.success(dataList);
     }
+
+    
 }
