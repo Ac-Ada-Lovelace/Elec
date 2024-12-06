@@ -48,4 +48,6 @@ public class DataController {
     public List<Data> getAllData() {
         return dataService.getAllData();
     }
+
+    
 }
