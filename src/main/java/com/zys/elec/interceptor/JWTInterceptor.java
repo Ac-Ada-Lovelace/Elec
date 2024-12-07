@@ -31,6 +31,7 @@ public class JWTInterceptor implements HandlerInterceptor {
     //     return false;
     // }
 
+
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
@@ -44,7 +45,14 @@ public class JWTInterceptor implements HandlerInterceptor {
         
         token = token.substring(7);
         
-        return jwtAuthService.validateToken(token);
-
+        if (jwtAuthService.validateToken(token)) {
+            // 将 token 存储在请求属性中
+            request.setAttribute("token", token);
+            return true;
+        } else {
+            // 验证失败，返回401未授权
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return false;
+        }
     }
 }

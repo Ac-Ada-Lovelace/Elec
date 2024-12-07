@@ -35,3 +35,4 @@ build/
 
 
 src/main/resources/application-personal.properties
+src\main\resources\application.properties
